@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaração de Amor</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #message {
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+        #nao {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">eu te amo, gostaria de passar o resto de sua vida ao meu lado?</div>
+    <div id="sim" class="button" onclick="redirect()">Sim</div>
+    <div id="nao" class="button" onmouseover="moveNo()">Não</div>
+
+    <script>
+        function redirect() {
+            window.location.href = "https://www.youtube.com/watch?v=YHplij1tFiw&t=42s";
+        }
+
+        function moveNo() {
+            const naoButton = document.getElementById("nao");
+            const message = document.getElementById("message");
+            const simButton = document.getElementById("sim");
+
+            const maxWidth = window.innerWidth - naoButton.offsetWidth;
+            const maxHeight = window.innerHeight - naoButton.offsetHeight;
+
+            let newLeft, newTop;
+            let overlap;
+
+            do {
+                newLeft = Math.floor(Math.random() * maxWidth);
+                newTop = Math.floor(Math.random() * maxHeight);
+
+                overlap = !(
+                    newLeft + naoButton.offsetWidth < message.offsetLeft ||
+                    newTop + naoButton.offsetHeight < message.offsetTop ||
+                    newLeft > message.offsetLeft + message.offsetWidth ||
+                    newTop > message.offsetTop + message.offsetHeight
+                ) || (
+                    newLeft + naoButton.offsetWidth < simButton.offsetLeft ||
+                    newTop + naoButton.offsetHeight < simButton.offsetTop ||
+                    newLeft > simButton.offsetLeft + simButton.offsetWidth ||
+                    newTop > simButton.offsetTop + simButton.offsetHeight
+                );
+
+            } while (overlap);
+
+            naoButton.style.left = newLeft + 'px';
+            naoButton.style.top = newTop + 'px';
+        }
+    </script>
+</body>
+</html>
