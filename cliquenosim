@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Especial</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            position: relative;
+        }
+        .button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+        }
+        #sim {
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p>Eu te amo, gostaria de passar o resto de sua vida ao meu lado?</p>
+        <button id="sim" class="button">Sim</button>
+        <button id="nao" class="button">Não</button>
+    </div>
+
+    <script>
+        const simButton = document.getElementById('sim');
+        const naoButton = document.getElementById('nao');
+        const container = document.getElementById('container');
+        
+        simButton.addEventListener('click', () => {
+            window.location.href = "https://www.youtube.com/watch?v=YHplij1tFiw&t=42s";
+        });
+
+        naoButton.addEventListener('mouseover', () => {
+            const containerRect = container.getBoundingClientRect();
+            const naoButtonRect = naoButton.getBoundingClientRect();
+            
+            let newX, newY;
+            do {
+                newX = Math.random() * (containerRect.width - naoButtonRect.width);
+                newY = Math.random() * (containerRect.height - naoButtonRect.height);
+            } while (
+                newX < containerRect.width / 2 - 100 && 
+                newX > containerRect.width / 2 + 100 && 
+                newY > containerRect.height / 2 - 50 &&
+                newY < containerRect.height / 2 + 50
+            );
+            
+            naoButton.style.left = `${newX}px`;
+            naoButton.style.top = `${newY}px`;
+        });
+    </script>
+</body>
+</html> 
